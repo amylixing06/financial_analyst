@@ -1,8 +1,9 @@
 streamlit==1.32.0
-crewai==0.28.5
+crewai==0.5.0
 yfinance==0.2.36
 pandas==2.1.4
 matplotlib==3.8.2
 plotly==5.18.0
 python-dotenv==1.0.1
-sambanova-ai==0.0.9 
+sambanova-ai==0.0.9
+flask==2.2.3 

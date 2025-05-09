@@ -1,0 +1,18 @@
+{
+  "name": "multi-agent-financial-analyst",
+  "version": "1.0.0",
+  "description": "多智能体AI股票分析师 - 深度融合基本面与技术面的智能分析系统",
+  "scripts": {
+    "build": "bash build_script.sh",
+    "start": "streamlit run financial_analyst.py"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/multi_agent_financial_analyst.git"
+  },
+  "author": "",
+  "license": "MIT"
+} 

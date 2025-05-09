@@ -2,6 +2,8 @@
 
 一个强大的多智能体系统，利用人工智能对股票进行深度分析并生成专业投资报告。
 
+[![部署到Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fyourusername%2Fmulti_agent_financial_analyst)
+
 ## 🎯 核心亮点
 
 - **股票分析智能体**：深度融合基本面与技术面指标，全方位解析股票价值
@@ -84,6 +86,19 @@ streamlit run financial_analyst.py
 - 自动生成华尔街级分析框架
 - 关键数据高亮标记
 - 风险提示智能标注
+
+## 📤 部署指南
+
+### Vercel部署
+
+1. 点击上方的"部署到Vercel"按钮
+2. 登录您的Vercel账户
+3. 设置环境变量`SAMBANOVA_API_KEY`
+4. 完成部署流程
+
+### 本地部署
+
+按照上述"快速启动指南"进行本地部署。
 
 ## 注意事项
 
