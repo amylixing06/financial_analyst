@@ -1,17 +1,25 @@
-# 环境变量文件（包含API密钥）
+# 环境变量文件
 .env
-
-# Python虚拟环境
-venv/
-env/
-.venv/
-.env/
 
 # Python缓存文件
 __pycache__/
 *.py[cod]
 *$py.class
-.pytest_cache/
+
+# 虚拟环境
+venv/
+env/
+ENV/
+
+# 日志文件
+*.log
+
+# MacOS系统文件
+.DS_Store
+
+# IDE配置
+.idea/
+.vscode/
 
 # 分发/打包
 dist/
@@ -22,11 +30,8 @@ build/
 .ipynb_checkpoints
 
 # 操作系统文件
-.DS_Store
 Thumbs.db
 
 # IDE相关
-.idea/
-.vscode/
 *.swp
 *.swo 
