@@ -43,4 +43,4 @@ if submit:
 
 # 页脚
 st.markdown("---")
-st.markdown("**多智能体AI股票分析师** | 由AI驱动的智能投资分析平台") 
+st.markdown("**多智能体AI股票分析师** | 由DeepSeek驱动的智能投资分析平台") 

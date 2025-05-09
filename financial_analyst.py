@@ -2,30 +2,29 @@ import streamlit as st
 import os
 import json
 from dotenv import load_dotenv
-from crewai import Agent, Task, Crew
-from crewai.process import Process
-from openai import OpenAI
+# 导入新的DeepSeek API模块中的类
+from deepseek_api import Agent, Task, Crew, Process, OpenAI
 from financial_tools import get_stock_tools
 
 # 加载环境变量
 load_dotenv()
 
-# 配置OpenAI
-def setup_openai():
+# 配置DeepSeek
+def setup_deepseek():
     # 尝试从 Streamlit Secrets 获取 API 密钥
     try:
-        api_key = st.secrets["openai_api_key"]
+        api_key = st.secrets["deepseek_api_key"]
     except:
         # 从环境变量获取
-        api_key = os.getenv("OPENAI_API_KEY")
+        api_key = os.getenv("DEEPSEEK_API_KEY")
 
     if api_key:
-        # 初始化OpenAI客户端
+        # 初始化DeepSeek客户端
         client = OpenAI(api_key=api_key)
-        os.environ["OPENAI_API_KEY"] = api_key
+        os.environ["DEEPSEEK_API_KEY"] = api_key
         return True
     else:
-        st.error("未找到OpenAI API密钥。请在Streamlit Cloud中设置Secrets或在本地设置环境变量。")
+        st.error("未找到DeepSeek API密钥。请在Streamlit Cloud中设置Secrets或在本地设置环境变量。")
         return False
 
 # 定义分析师智能体
@@ -93,8 +92,8 @@ def create_report_task(agent, ticker_symbol):
 # 分析股票并生成报告
 def analyze_stock(ticker_symbol):
     try:
-        # 确保 OpenAI 配置完成
-        if not setup_openai():
+        # 确保 DeepSeek 配置完成
+        if not setup_deepseek():
             return "API密钥配置错误，无法进行分析"
             
         # 创建智能体
@@ -167,7 +166,7 @@ def main():
 
     # 页脚
     st.markdown("---")
-    st.markdown("**多智能体AI股票分析师** | 由OpenAI和CrewAI提供支持")
+    st.markdown("**多智能体AI股票分析师** | 由DeepSeek和CrewAI提供支持")
 
 # 当直接运行此文件时
 if __name__ == "__main__":

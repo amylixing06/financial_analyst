@@ -1,109 +1,98 @@
 # 多智能体AI股票分析师
 
-一个强大的多智能体系统，利用人工智能对股票进行深度分析并生成专业投资报告。
+一个由DeepSeek驱动的AI股票分析系统，利用多智能体架构进行全面的股票分析和报告生成。
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://financial-analyst.streamlit.app/)
+## 功能特点
 
-## 🎯 核心亮点
+- 股票基本面和技术面全面分析
+- 多智能体协作（分析师智能体 + 报告撰写智能体）
+- 生成专业格式的Markdown投资报告
+- 使用DeepSeek AI模型提供强大的推理和分析能力
 
-- **股票分析智能体**：深度融合基本面与技术面指标，全方位解析股票价值
-- **报告撰写智能体**：将复杂数据转化为清晰易懂的专业级投资报告
-- **实时市场数据流接入** | **动态可视化分析** | **一键生成Markdown格式报告**
+## 安装与设置
 
-## 项目核心架构
-
-项目采用了一个由两个专业AI智能体组成的系统：
-
-1. **股票分析智能体**：负责收集和分析股票数据
-2. **报告撰写智能体**：将分析转化为专业报告
-
-两个智能体通过 CrewAI 框架进行协作，按顺序执行任务，形成一个完整的工作流程。
-
-## 技术组成
-
-项目主要由以下几个部分组成：
-
-1. **核心文件**
-   - `financial_analyst.py`：主程序，包含Streamlit界面和智能体配置
-   - `financial_tools.py`：包含用于获取股票数据的工具
-   - `streamlit_app.py`：Streamlit Cloud 入口文件
-
-2. **主要技术栈**
-   - Streamlit：用于构建Web界面
-   - CrewAI：用于配置和管理多智能体工作流
-   - OpenAI：提供大型语言模型支持
-   - YFinance：用于获取实时股票数据
-
-3. **数据流程**
-   
-   数据流向为：yfinance API → 股票分析智能体 → 报告撰写智能体 → Streamlit界面
-
-## ⚡ 快速启动指南
-
-### 1️⃣ 克隆仓库
+1. 克隆仓库并安装依赖：
 
 ```bash
 git clone https://github.com/yourusername/financial_analyst.git
 cd financial_analyst
-```
-
-### 2️⃣ 安装依赖
-
-```bash
 pip install -r requirements.txt
 ```
 
-### 3️⃣ 配置环境密钥
+2. 获取DeepSeek API密钥:
 
-在项目根目录创建`.env`文件并填入：
+   - 访问 [DeepSeek开发者平台](https://platform.deepseek.com)
+   - 注册并创建API密钥
+   - 复制API密钥
 
-```
-OPENAI_API_KEY=你的OpenAI_API密钥
-```
+3. 设置环境变量：
 
-### 4️⃣ 启动应用
+   - 将`sample.env`复制为`.env`
+   - 编辑`.env`文件，添加您的DeepSeek API密钥:
+   ```
+   DEEPSEEK_API_KEY=您的DeepSeek_API密钥
+   ```
+
+## 使用方法
+
+### 本地运行
 
 ```bash
 streamlit run streamlit_app.py
 ```
 
-## 🌐 交互体验
+### Streamlit Cloud部署
 
-- 运行命令启动应用
-- 输入股票代码（如AAPL）
-- 点击「智能分析」触发多智能体协作
-- 30秒内获得含买卖建议的完整报告
+1. 在Streamlit Cloud中，设置以下Secrets:
+   - `deepseek_api_key`: 您的DeepSeek API密钥
 
-## 🤖 技术内幕
+2. 指向`streamlit_app.py`作为主要入口点
 
-### 双智能体协同作战
+## 代码结构
 
-#### 🔍 分析引擎
-- 财务健康度扫描
-- 新闻情绪雷达监测
-- MACD/RSI多指标融合诊断
+- `streamlit_app.py`: 主应用入口点
+- `financial_analyst.py`: 主要业务逻辑和智能体定义
+- `financial_tools.py`: 用于股票分析的工具集合
+- `deepseek_api.py`: DeepSeek API封装模块
+- `bootstrap.py`: 应用引导脚本，处理环境兼容性
+- `sqlite_patch.py`: SQLite版本兼容补丁
+- `simple_app.py`: 简化版应用（用于调试）
+- `test_app.py`: 测试工具（用于验证环境）
 
-#### ✍️ 报告大师
-- 自动生成华尔街级分析框架
-- 关键数据高亮标记
-- 风险提示智能标注
+## 为什么使用DeepSeek
 
-## 📤 部署指南
+DeepSeek提供了强大的语言理解和分析能力，特别是在复杂推理任务方面表现优异。我们使用:
 
-### Streamlit Cloud 部署
+- DeepSeek-V3(`deepseek-chat`)：用于一般对话和报告生成
+- DeepSeek-R1(`deepseek-reasoner`)：用于复杂分析和推理任务
 
-1. 注册并登录 [Streamlit Cloud](https://streamlit.io/cloud)
-2. 连接您的 GitHub 仓库
-3. 选择 `streamlit_app.py` 作为主文件
-4. 在"高级设置"中添加环境变量 `OPENAI_API_KEY`
-5. 点击"部署"按钮
+## 技术栈
 
-### 本地部署
+- Streamlit：用户界面
+- DeepSeek API：大型语言模型
+- yfinance：股票数据获取
+- pandas/numpy：数据处理
+- langchain：大型语言模型框架
+- plotly：数据可视化
 
-按照上述"快速启动指南"进行本地部署。
+## 常见问题
 
-## 注意事项
+**Q: 我在Streamlit Cloud上部署时遇到问题？**
 
-- 本项目需要 OpenAI API 密钥，请在 [OpenAI 官方网站](https://platform.openai.com/) 申请
-- 分析结果仅供参考，不构成投资建议
-- YFinance API 可能存在数据延迟，实际交易前请核实数据 
+A: 确保在Streamlit Cloud Secrets中设置了`deepseek_api_key`。此外，应用使用渐进式加载策略，如果遇到问题，会自动降级到简化版本。
+
+**Q: 分析需要多长时间？**
+
+A: 通常需要30-60秒完成一次完整分析。这取决于模型的负载和要分析的股票复杂度。
+
+**Q: 我需要付费吗？**
+
+A: 您需要有自己的DeepSeek API账户和密钥。DeepSeek提供一定数量的免费额度，但超出后需要付费。
+
+## 贡献
+
+欢迎提交问题和拉取请求！如果您有改进建议，请随时与我们联系。
+
+## 许可证
+
+MIT 
