@@ -1,0 +1,124 @@
+# Cursor 代码片段 - AI股票分析应用
+
+[deepseek-api-call]
+description = "DeepSeek API调用模板"
+language = "python"
+code = """
+# 创建DeepSeek API客户端
+from deepseek_api import DeepSeekAPI
+deepseek = DeepSeekAPI(api_key=api_key)
+
+# 构建提示
+system_message = """你是一位专业的股票分析师，需要基于提供的数据进行分析。"""
+
+user_message = f"""请分析以下数据：
+{data}
+"""
+
+messages = [
+    {"role": "system", "content": system_message},
+    {"role": "user", "content": user_message}
+]
+
+# 调用 DeepSeek API
+response = deepseek.chat(
+    messages=messages,
+    model="deepseek-reasoner",
+    temperature=0.7,
+    max_tokens=4000
+)
+
+# 提取回复内容
+result = response['choices'][0]['message']['content']
+"""
+
+[streamlit-section]
+description = "Streamlit 页面区域模板"
+language = "python"
+code = """
+import streamlit as st
+
+st.markdown("## 📊 {section_title}")
+
+with st.container():
+    st.write("{section_description}")
+    
+    # 显示内容
+    with st.expander("{expander_title}", expanded=True):
+        # 内容区域
+        pass
+"""
+
+[stock-data-fetch]
+description = "获取股票数据模板"
+language = "python"
+code = """
+import yfinance as yf
+
+def get_stock_data(ticker_symbol, period="1y"):
+    """获取股票数据"""
+    try:
+        ticker = yf.Ticker(ticker_symbol)
+        
+        # 获取基本信息
+        info = ticker.info
+        
+        # 获取历史价格数据
+        hist = ticker.history(period=period)
+        
+        # 提取关键数据
+        data = {
+            "基本信息": {
+                "公司名称": info.get("longName", "未知"),
+                "行业": info.get("industry", "未知"),
+                "市值": info.get("marketCap", "未知"),
+                "当前价格": info.get("currentPrice", info.get("regularMarketPrice", "未知")),
+            },
+            "历史数据": {
+                "52周最高": hist["High"].max(),
+                "52周最低": hist["Low"].min(),
+                "平均交易量": hist["Volume"].mean(),
+                "最新收盘价": hist["Close"].iloc[-1],
+            }
+        }
+        
+        return data
+    except Exception as e:
+        return {"错误": str(e)}
+"""
+
+[heroku-deployment]
+description = "Heroku部署命令"
+language = "bash"
+code = """
+# 确保已添加所有文件
+git add .
+git commit -m "准备部署"
+
+# 推送到Heroku
+git push heroku main
+
+# 查看日志
+heroku logs --tail
+"""
+
+[api-key-config]
+description = "API密钥配置模板"
+language = "python"
+code = """
+import os
+import streamlit as st
+
+def get_api_key():
+    """获取API密钥，优先从Streamlit Secrets获取，然后从环境变量获取"""
+    # 尝试从 Streamlit Secrets 获取
+    try:
+        return st.secrets["deepseek_api_key"]
+    except:
+        # 尝试从环境变量获取
+        api_key = os.environ.get("DEEPSEEK_API_KEY")
+        if not api_key:
+            st.error("未找到DeepSeek API密钥。请在Streamlit Secrets或环境变量中设置。")
+            st.stop()
+        return api_key
+""" 

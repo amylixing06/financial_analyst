@@ -1,0 +1,62 @@
+# Cursor 项目规则 - AI股票分析应用
+
+# Python代码风格
+[*.py]
+indent_style = space
+indent_size = 4
+trim_trailing_whitespace = true
+insert_final_newline = true
+max_line_length = 100
+quote_type = double
+
+# 命名规范
+variable.naming_convention = snake_case
+function.naming_convention = snake_case
+class.naming_convention = PascalCase
+constant.naming_convention = UPPER_CASE
+
+# 导入规则
+imports.grouping = [
+  "standard_library",
+  "third_party",
+  "local_application"
+]
+imports.sort_alphabetically = true
+
+# 自定义AI提示
+ai.complete_function_docstrings = true
+ai.prefer_chinese_comments = true
+ai.context_window = 10
+
+# 流程
+streamlit.prefer_st_markdown_for_text = true
+streamlit.use_spinners_for_loading = true
+streamlit.organize_by_sections = true
+
+# 样式
+[*.{css,html}]
+indent_style = space
+indent_size = 2
+
+# API相关
+deepseek_api.model_preference = "deepseek-reasoner"
+deepseek_api.default_temperature = 0.7
+deepseek_api.max_tokens_default = 4000
+
+# 部署相关
+deployment.include_instructions = true
+deployment.verify_dependencies = true
+
+# 文档
+documentation.include_examples = true
+documentation.language = "zh-CN"
+
+# Git 配置
+git.ignore_generated_files = true
+git.commit_message_convention = "类型(范围): 描述"
+
+# Shell 脚本
+[*.sh]
+indent_style = space
+indent_size = 2
+executable = true 
