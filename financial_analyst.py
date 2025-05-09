@@ -11,13 +11,19 @@ from financial_tools import get_stock_tools
 load_dotenv()
 
 # 配置OpenAI
-api_key = os.getenv("OPENAI_API_KEY")
+# 尝试从 Streamlit Secrets 获取 API 密钥
+try:
+    api_key = st.secrets["openai_api_key"]
+except:
+    # 从环境变量获取
+    api_key = os.getenv("OPENAI_API_KEY")
+
 if api_key:
     # 初始化OpenAI客户端
     client = OpenAI(api_key=api_key)
     os.environ["OPENAI_API_KEY"] = api_key
 else:
-    st.error("未找到OPENAI_API_KEY环境变量，请在.env文件中设置。")
+    st.error("未找到OpenAI API密钥。请在Streamlit Cloud中设置Secrets或在本地设置环境变量。")
     st.stop()
 
 # 定义分析师智能体
