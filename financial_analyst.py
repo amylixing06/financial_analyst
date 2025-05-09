@@ -4,21 +4,20 @@ import json
 from dotenv import load_dotenv
 from crewai import Agent, Task, Crew
 from crewai.process import Process
-from sambanova_ai import initialize
+from openai import OpenAI
 from financial_tools import get_stock_tools
 
 # 加载环境变量
 load_dotenv()
 
-# 配置SambaNova AI
-api_key = os.getenv("SAMBANOVA_API_KEY")
+# 配置OpenAI
+api_key = os.getenv("OPENAI_API_KEY")
 if api_key:
-    initialize(
-        api_key=api_key,
-        model_name="llama-4-maverick-17b"  # 使用Llama-4大语言模型
-    )
+    # 初始化OpenAI客户端
+    client = OpenAI(api_key=api_key)
+    os.environ["OPENAI_API_KEY"] = api_key
 else:
-    st.error("未找到SAMBANOVA_API_KEY环境变量，请在.env文件中设置。")
+    st.error("未找到OPENAI_API_KEY环境变量，请在.env文件中设置。")
     st.stop()
 
 # 定义分析师智能体
@@ -154,4 +153,4 @@ if submit_button and ticker_symbol:
 
 # 页脚
 st.markdown("---")
-st.markdown("**多智能体AI股票分析师** | 由SambaNova AI和CrewAI提供支持") 
+st.markdown("**多智能体AI股票分析师** | 由OpenAI和CrewAI提供支持") 

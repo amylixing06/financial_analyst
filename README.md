@@ -2,7 +2,7 @@
 
 一个强大的多智能体系统，利用人工智能对股票进行深度分析并生成专业投资报告。
 
-[![部署到Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fyourusername%2Fmulti_agent_financial_analyst)
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://financial-analyst.streamlit.app/)
 
 ## 🎯 核心亮点
 
@@ -26,11 +26,12 @@
 1. **核心文件**
    - `financial_analyst.py`：主程序，包含Streamlit界面和智能体配置
    - `financial_tools.py`：包含用于获取股票数据的工具
+   - `streamlit_app.py`：Streamlit Cloud 入口文件
 
 2. **主要技术栈**
    - Streamlit：用于构建Web界面
    - CrewAI：用于配置和管理多智能体工作流
-   - SambaNova AI LLM：使用Llama-4-Maverick-17B大型语言模型
+   - OpenAI：提供大型语言模型支持
    - YFinance：用于获取实时股票数据
 
 3. **数据流程**
@@ -42,8 +43,8 @@
 ### 1️⃣ 克隆仓库
 
 ```bash
-git clone https://github.com/yourusername/multi_agent_financial_analyst.git
-cd multi_agent_financial_analyst
+git clone https://github.com/yourusername/financial_analyst.git
+cd financial_analyst
 ```
 
 ### 2️⃣ 安装依赖
@@ -57,13 +58,13 @@ pip install -r requirements.txt
 在项目根目录创建`.env`文件并填入：
 
 ```
-SAMBANOVA_API_KEY=你的API密钥
+OPENAI_API_KEY=你的OpenAI_API密钥
 ```
 
 ### 4️⃣ 启动应用
 
 ```bash
-streamlit run financial_analyst.py
+streamlit run streamlit_app.py
 ```
 
 ## 🌐 交互体验
@@ -89,12 +90,13 @@ streamlit run financial_analyst.py
 
 ## 📤 部署指南
 
-### Vercel部署
+### Streamlit Cloud 部署
 
-1. 点击上方的"部署到Vercel"按钮
-2. 登录您的Vercel账户
-3. 设置环境变量`SAMBANOVA_API_KEY`
-4. 完成部署流程
+1. 注册并登录 [Streamlit Cloud](https://streamlit.io/cloud)
+2. 连接您的 GitHub 仓库
+3. 选择 `streamlit_app.py` 作为主文件
+4. 在"高级设置"中添加环境变量 `OPENAI_API_KEY`
+5. 点击"部署"按钮
 
 ### 本地部署
 
@@ -102,6 +104,6 @@ streamlit run financial_analyst.py
 
 ## 注意事项
 
-- 本项目需要SambaNova AI API密钥，请在[官方网站](https://sambanova.ai/)申请
+- 本项目需要 OpenAI API 密钥，请在 [OpenAI 官方网站](https://platform.openai.com/) 申请
 - 分析结果仅供参考，不构成投资建议
-- YFinance API可能存在数据延迟，实际交易前请核实数据 
+- YFinance API 可能存在数据延迟，实际交易前请核实数据 
